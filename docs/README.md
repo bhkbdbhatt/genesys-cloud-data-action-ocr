@@ -182,7 +182,6 @@ curl https://<YOUR-APP-RUNNER-URL>[.awsapprunner.com/health](https://.awsapprunn
 * **Asynchronous Processing:** For multi-page documents taking longer than 15 seconds, refer to `docs/ARCHITECTURE.md` to review the SQS/S3 async polling configuration model.
 
 ---
-
 ```mermaid
 flowchart LR
     subgraph GC["Genesys Cloud CX"]
@@ -203,8 +202,8 @@ flowchart LR
     A -->|1. Extract Attachment| B
     B -->|2. HTTPS POST + API Key| C
     C --> D
-    D -->|<= 15 Pages (Sync)| E
-    D -->|> 15 Pages (Async)| F
+    D -->|"&lt;= 15 Pages (Sync)"| E
+    D -->|"> 15 Pages (Async)"| F
     F --> G
     E --> H
     H -->|3. Clean JSON Output| B
