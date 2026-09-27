@@ -1,5 +1,3 @@
-Here is the complete, customer-facing `README.md` for your **Genesys Cloud OCR Blueprint** package.
-
 ```markdown
 # Genesys Cloud Data Action OCR Blueprint
 
