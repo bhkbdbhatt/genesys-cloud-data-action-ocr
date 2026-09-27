@@ -1,0 +1,104 @@
+{
+    "name": "OCR Document Processing Action",
+    "category": "Web Services Data Actions",
+    "config": {
+        "request": {
+            "requestUrlTemplate": "https://your-ocr-service-domain.com/ocr",
+            "requestType": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "requestTemplate": "{\n  \"fileUrl\": \"${input.fileUrl}\",\n  \"mimeType\": \"${input.mimeType}\"\n}"
+        },
+        "response": {
+            "translationMap": {
+                "fullText": "$.fullText",
+                "totalPages": "$.totalPages",
+                "overallConfidence": "$.overallConfidence",
+                "pages": "$.pages"
+            },
+            "translationMapDefaults": {
+                "fullText": "\"\"",
+                "totalPages": "0",
+                "overallConfidence": "0.0",
+                "pages": "[]"
+            },
+            "successTemplate": "{\n  \"fullText\": ${fullText},\n  \"totalPages\": ${totalPages},\n  \"overallConfidence\": ${overallConfidence},\n  \"pages\": ${pages}\n}"
+        }
+    },
+    "contract": {
+        "input": {
+            "inputSchema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "title": "OCRInput",
+                "type": "object",
+                "required": [
+                    "fileUrl"
+                ],
+                "properties": {
+                    "fileUrl": {
+                        "type": "string",
+                        "description": "Public URL or S3 URL of document attachment."
+                    },
+                    "mimeType": {
+                        "type": "string",
+                        "description": "Attachment MIME type (e.g., application/pdf, image/png).",
+                        "default": "application/pdf"
+                    }
+                }
+            }
+        },
+        "output": {
+            "outputSchema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "title": "OCROutput",
+                "type": "object",
+                "properties": {
+                    "fullText": {
+                        "type": "string"
+                    },
+                    "totalPages": {
+                        "type": "integer"
+                    },
+                    "overallConfidence": {
+                        "type": "number"
+                    },
+                    "pages": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "pageNumber": {
+                                    "type": "integer"
+                                },
+                                "text": {
+                                    "type": "string"
+                                },
+                                "confidence": {
+                                    "type": "number"
+                                },
+                                "blocks": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "text": {
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "type": "string"
+                                            },
+                                            "confidence": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,55 @@
+inboundMessage:
+  name: OCR Attachment Automation Flow
+  description: Triggers OCR processing on incoming message attachments.
+  startAction: Extract First Attachment
+  actions:
+    - updateVariables:
+        name: Extract First Attachment
+        statements:
+          - variable: Flow.AttachmentUrl
+            value: Message.Message.attachments[0].contentUrl
+          - variable: Flow.MimeType
+            value: Message.Message.attachments[0].contentType
+        next: Execute OCR Action
+
+    - callDataAction:
+        name: Execute OCR Action
+        category: Web Services Data Actions
+        dataActionName: OCR Attachment Text Extractor
+        inputs:
+          fileUrl: Flow.AttachmentUrl
+          mimeType: Flow.MimeType
+        outputs:
+          fullText: Task.ExtractedText
+          overallConfidence: Task.ConfidenceScore
+        success: Evaluate Confidence
+        failure: Set Failure Status
+
+    - decision:
+        name: Evaluate Confidence
+        condition: "Task.ConfidenceScore >= 70.0"
+        true: Transfer to Queue
+        false: Request Manual Review
+
+    - setParticipantData:
+        name: Transfer to Queue
+        attributes:
+          OCR_ExtractedText: Task.ExtractedText
+          OCR_Status: "Success"
+        next: Disconnect Interaction
+
+    - setParticipantData:
+        name: Request Manual Review
+        attributes:
+          OCR_ExtractedText: Task.ExtractedText
+          OCR_Status: "LowConfidenceReview"
+        next: Disconnect Interaction
+
+    - setParticipantData:
+        name: Set Failure Status
+        attributes:
+          OCR_Status: "Failed"
+        next: Disconnect Interaction
+
+    - disconnect:
+        name: Disconnect Interaction

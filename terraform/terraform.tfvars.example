@@ -1,0 +1,5 @@
+aws_region            = "us-east-1"
+ocr_api_key           = "your-custom-secret-key-12345"
+genesys_client_id     = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+genesys_client_secret = "your-genesys-client-secret"
+genesys_aws_region    = "us-east-1"

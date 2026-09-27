@@ -1,0 +1,12 @@
+# Terraform
+**/terraform/.terraform/
+**/terraform/*.tfstate
+**/terraform/*.tfstate.backup
+**/terraform/terraform.tfvars
+
+# Python
+__pycache__/
+*.py[cod]
+
+# OS
+.DS_Store
