@@ -219,5 +219,5 @@ flowchart LR
 ```
 ## Support & License
 
-* **License:** Proprietary / License agreement granted upon package purchase.
-* **Support:** For technical support or customization inquiries, contact `support@yourdomain.com`.
+* **License:** Apache Licence 2.0
+* **Support:** For technical support or customization inquiries, contact `bhk.bdbhatt@gmail.com`.
