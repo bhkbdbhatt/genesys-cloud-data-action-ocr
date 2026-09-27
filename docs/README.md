@@ -1,4 +1,3 @@
-```markdown
 # Genesys Cloud Data Action OCR Blueprint
 
 A production-ready, automated OCR pipeline that extracts structured text from multi-page PDFs and images uploaded in Genesys Cloud Web Chat, Messaging, and Email interactions. 
@@ -48,7 +47,7 @@ Because this solution uses AWS App Runner and pay-per-use AWS Textract, costs sc
 
 ### Step 1: Clone or Download the Blueprint
 ```bash
-git clone [https://github.com/your-repo/genesys-cloud-ocr-blueprint.git](https://github.com/your-repo/genesys-cloud-ocr-blueprint.git)
+git clone [https://github.com/bhkbdbhatt/genesys-cloud-ocr-blueprint.git](https://github.com/bhkbdbhatt/genesys-cloud-ocr-blueprint.git)
 cd genesys-cloud-ocr-blueprint
 
 ```
