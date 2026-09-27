@@ -9,30 +9,6 @@ This blueprint deploys an isolated, high-performance Python Flask microservice p
 
 ---
 
-## Architecture Overview
-
-
-```
-
-```
-                                  YOUR AWS ACCOUNT
-                          ┌───────────────────────────────┐
-                          │  AWS App Runner               │
-                          │  ┌─────────────────────────┐  │
-
-```
-
-┌──────────────────────┐      │  │ Python Flask Microservice│  │      ┌─────────────────┐
-│ Genesys Cloud        │      │  │ (Docker Container)      │  │─────>│ AWS Textract    │
-│ Architect / Action   │─────>│  └─────────────────────────┘  │      │ (OCR Engine)    │
-└──────────────────────┘      │               ▲               │      └─────────────────┘
-HTTPS / API Key          │               │               │
-└───────────────┼───────────────┘
-│
-Automated Deployment
-(Terraform & Archy)
-
-```
 
 ### Key Features
 - **Multi-Page PDF & Image Support:** Automatically splits multi-page PDFs in-memory and returns page-by-page as well as aggregated text.
