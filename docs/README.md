@@ -183,6 +183,38 @@ curl https://<YOUR-APP-RUNNER-URL>[.awsapprunner.com/health](https://.awsapprunn
 
 ---
 
+```mermaid
+flowchart LR
+    %% Styles %%
+    classDef genesys fill:#E65100,stroke:#FFF,stroke-width:2px,color:#FFF;
+    classDef aws fill:#232F3E,stroke:#FF9900,stroke-width:2px,color:#FFF;
+    classDef process fill:#1E88E5,stroke:#FFF,stroke-width:1px,color:#FFF;
+
+    subgraph GC["Genesys Cloud CX"]
+        A["Architect Flow"] ::: genesys
+        B["Data Action"] ::: genesys
+    end
+
+    subgraph AWS["Customer AWS Account"]
+        C["AWS App Runner\n(Flask Docker API)"] ::: aws
+        D{"Page Count\nThreshold"} ::: process
+        E["AWS Textract\n(OCR Engine)"] ::: aws
+        F[("AWS S3 Staging")] ::: aws
+        G[("AWS SQS Queue")] ::: aws
+        H["PII Masking Engine\n(SSN / Credit Card)"] ::: process
+    end
+
+    %% Interactions %%
+    A -->|1. Extract Attachment| B
+    B -->|2. HTTPS POST + API Key| C
+    C --> D
+    D -->|<= 15 Pages (Sync)| E
+    D -->|> 15 Pages (Async)| F
+    F --> G
+    E --> H
+    H -->|3. Clean JSON Output| B
+```
+
 ## Support & License
 
 * **License:** Proprietary / License agreement granted upon package purchase.
