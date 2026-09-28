@@ -194,3 +194,4 @@ flowchart LR
 
 * **License:** Apache Licence 2.0
 * **Support:** For technical support or customization inquiries, contact `bhk.bdbhatt@gmail.com`.
+* [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/bhargavbhatt)
